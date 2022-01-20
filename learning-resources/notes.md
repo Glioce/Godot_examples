@@ -29,6 +29,8 @@ Docks: FileSystem, Scene, Inspector, Import, Node.
 
 Bottom panel: Output, Debugger, Audio, Animation.  
 
+¿Rueda que gira cuando se redibuja la interfaz?
+
 ## Nodos!
 Bloques de construcción con atributos:
 - nombre
@@ -67,6 +69,7 @@ GDScript
 - soporta multi-hilo de forma eficiente
 - no usa recolector de basura
 - dinámico, se puede combinar con otros lenguajes (c++, GDNative)
+- clic derecho "Attach Script"
 
 VisualScript
 - existe desde 3.0
@@ -79,4 +82,65 @@ VisualScript
 GDNative/C++
 - scripting en C++
 - optimizar partes del código
+
+## Señales!
+Se emiten con diferentes acciones, se pueden conectar a funciones de cualquier script y se pueden crear señales propias.
+1º conectar, 2º definir la función  
+A través GUI: Dock Node -> Signals -> Connect -> Create connection  
+A través de código `_on_[EmitterNode]_[SignalName]()`  
+
+## GDScript intro
+Función más utilizada `Node.get_node()`  
+Los nodos se referencían por nombre, no por tipo. ¡Cuidado al cambiar nombres!  
+
+Varias acciones en Godot son lanzadas por callbacks (= vitual functions)  
+
+Es necesario procesar cosas en cada frame  
+`Node._process(delta)`  
+Idle process. Es como evento Step. Se puede activar y desctivar con `Node.set_process()`. Se ejecuta cada vez que se dibuja un frame.  
+El parámetro delta guarda el tiempo transcurrido en segundos.  
+
+`_physics_process()`  
+Physics. Debe usarse antes del phy step. Es como evento Step. Ocurre a intervalos fijos. 60 FPS por defecto (cambiar en Project Settings / Physics / Common / Phy FPS).  
+
+Primero `_physics_process()`, después `Node._process(delta)` ¿cómo?  
+
+Funciones redefinibles (virtuales)  
+`_enter_tree()` similar a evento Room Start sin hijos  
+`_ready()` es cono evento Create más parecida a Room Start  
+`_init()` es como constructor  
+`_exit_tree()` parecida a ev Destroy  
+`_process(delta)` como Step pero irregular  
+`_physics_process()` más parecida a Step  
+
+`Node.new()` crea nuevo nodo flotante  
+`add_child()` agrega hijo  
+`Scn.instance()` Crea instancia de una escena  
+`Nodo.free()` remueve nodo  
+`Node.queue_free()` forma más segura, borra cuando no emite señales  
+
+`scn = load("res://...")` carga al ejecutar script  
+`scn = preload("res://...")` carga en parse time  
+devuelven PackedScene  
+
+Convenciones de nombres  
+Clases (nodos) - PascalClase  
+Vars y funcs - snake_case  
+Const - ALL_CAPS
+
+`export (type) var var_name` para poner vars en editor ??  
+
+## Grupos!
+x  
+La clase SceneTree tiene varios métodos útiles.  
+
+## Otros
+¿Existe editor de spr integrado?  
+
+Para texturas sin filtro linear  
+Seleccionar en File dock, quitar filtro en Import dock.  
+
+Area2D - como player  
+AnimSprite - como spr  
+Coll shape - como mask  
 
