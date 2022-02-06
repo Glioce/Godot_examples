@@ -14,7 +14,7 @@ DESCONTINUADO/OBSOLETO `F4` abre ventana Search. Puedes buscar clases y los mét
 
 En editor de código, clic en icono 4 flechas modo sin distracciones.  
 
-OBSOLETO? `Ctrl+click` para abrir ayuda dentro del editor de código.  
+`Ctrl+Shift+click` para abrir ayuda dentro del editor de código.  
 
 ## Introducción paso a paso
 Project Manager - Primera ventana que aparece  
@@ -29,7 +29,10 @@ Docks: FileSystem, Scene, Inspector, Import, Node.
 
 Bottom panel: Output, Debugger, Audio, Animation.  
 
-¿Rueda que gira cuando se redibuja la interfaz?
+¿Rueda que gira cuando se redibuja la interfaz? Se ha eliminado.  
+
+En editor de escenas, teclas QWER cambian a modos Select, Move, Rotate y Ruler.  
+En la misma barra hay icono para hacer children not selectable.  
 
 ## Nodos!
 Bloques de construcción con atributos:
@@ -105,7 +108,7 @@ Physics. Debe usarse antes del phy step. Es como evento Step. Ocurre a intervalo
 
 Primero `_physics_process()`, después `Node._process(delta)` ¿cómo?  
 
-Funciones redefinibles (virtuales)  
+Funciones re-definibles (virtuales)  
 `_enter_tree()` similar a evento Room Start sin hijos  
 `_ready()` es cono evento Create más parecida a Room Start  
 `_init()` es como constructor  
@@ -130,9 +133,27 @@ Const - ALL_CAPS
 
 `export (type) var var_name` para poner vars en editor ??  
 
+`randomize()` igual que en GML  
+Nodo Timer es como alarmas de GameMaker  
+Nodo Path2D es como paths de GameMaker  
+Canvas Layer para ordenar dibujado  
+Class Control para UIs  
+
 ## Grupos!
 x  
 La clase SceneTree tiene varios métodos útiles.  
+
+## Definir controles / Entradas
+2 formas:
+- Project Settings > pestaña Input Map - Se ùeden asignar varios botones/teclas por entrada. Se usan las unciones `Input.is_action_pressed("...")`, `just_pressed`, `just_released`
+- Función `Inùt.is_key_pressed(KEY_*)` - no hay just_pressed, ni just_released
+
+## Sonido!
+Archivos comunes wav y ogg.  
+Nodo AudioStreamPlayer solo carga archivo de sonido.  
+
+## Partículas
+El nodo Particles2D tiene muchas opciones.  
 
 ## Otros
 ¿Existe editor de spr integrado?  
@@ -144,3 +165,10 @@ Area2D - como player
 AnimSprite - como spr  
 Coll shape - como mask  
 
+`$` es similar a `get_node()`  
+
+Fonts: cargar .ttf (dynamic) o bitmap font  
+
+¿Cómo conectar señales de diferentes escenas?  
+
+Sprite puede servir como background  
