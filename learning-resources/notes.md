@@ -60,6 +60,15 @@ Extensión .tscn (text scene)
 El dock Scene tiene un botón para agregar nodo y un botón para instanciar escena.  
 (`Ctrl+D` duplicar elementos de escena)  
 
+Clic derecho en nodo > Guardar como escena.  
+Escenas heredadas: Menú Scene > New Inherited Scene ...  
+
+En Inspector está el botón Manage object properties (icono desarmador y llave). Tiene la opción Make sub-resources unique (¿sirve para cambiar propiedades sin afectar a otras escenas?).  
+
+En Godot no se usan ids de instancias, en su lugar se usan rutas dentro del árbol de la escena.  
+
+Al crear una escena, los nodos se crean de arriba a abajo (recuerda `_ready()` es como Room Start).  
+
 ## Lenguajes
 GDScript y VisualScript son los principales.  
 C# y C++ necesitan IDE separado ??  
@@ -155,6 +164,28 @@ Nodo AudioStreamPlayer solo carga archivo de sonido.
 ## Partículas
 El nodo Particles2D tiene muchas opciones.  
 
+## GUI!
+Los nodos de la clase Control se pueden anidar en muchos niveles y casi no hay efectos en el rendimiento.  
+
+## Tipos de datos
+Los Nodos son tipos de datos muy importantes. Otro tipo de dato igual de importante es Resource.  
+Contenedores de datos usados comúnmente:  
+- Textura
+- Script
+- Mesh
+- Anim
+- AudioStream
+- Font
+- Translation
+
+Resources pueden ser propiedades o variables de un objeto.  
+Externo - tiene ruta a un archivo.  
+Built-in - no tiene ruta, se puede gaurdar dentro de la escena al borrar la propiedad ruta
+Ejemplo: `var res = load("res://img.png")`
+`preload` es más óptimo. Solo funciona con string constante.  
+
+PackedScene - escena dentro de un recurso.  
+
 ## Otros
 ¿Existe editor de spr integrado?  
 
@@ -172,3 +203,7 @@ Fonts: cargar .ttf (dynamic) o bitmap font
 ¿Cómo conectar señales de diferentes escenas?  
 
 Sprite puede servir como background  
+
+project.godot define la raíz del proyecto y describe el proyecto. Formato win ini.  
+
+Directorios sandbox res:// user://  
