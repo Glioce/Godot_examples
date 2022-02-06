@@ -162,7 +162,7 @@ Archivos comunes wav y ogg.
 Nodo AudioStreamPlayer solo carga archivo de sonido.  
 
 ## Partículas
-El nodo Particles2D tiene muchas opciones.  
+El nodo Particles2D tiene muchas opciones (algunas similares a los sistemas de partículas de GM). Usa material y textura.  
 
 ## GUI!
 Los nodos de la clase Control se pueden anidar en muchos niveles y casi no hay efectos en el rendimiento.  
@@ -185,6 +185,43 @@ Ejemplo: `var res = load("res://img.png")`
 `preload` es más óptimo. Solo funciona con string constante.  
 
 PackedScene - escena dentro de un recurso.  
+
+## Singleton  
+Es similar a global en GML.  
+Se carga antes que otras escenas.  
+Hereda de Node, la clase de la que derivan todos los nodos.  
+Project > Project Settings > AutoLoad tab > Nombre del nodo y Script  
+
+Una forma de usar como global en GM  
+```
+var alias = get_node("/root/global")
+alias.lv = 1
+# es quivalente a 
+global.lv = 1
+```
+
+## Canvas Layers
+Nodos 2D heredan transformación de nodos superiores en árbol.  
+Nodos 2D se muestran a través de un viewport `Viewport.canvas_transform`  
+
+Son similares a View y Draw GUI de GM  
+Sirven para
+- Parallax
+- HUD
+- Transition FX
+
+Viewport default layer 1  
+>0 encima, <0 detás, independiente de orden en el árbol.  
+
+Cada layer tiene transformaciones independientes.  
+El orden de dibujo óptimo depende del árbol. No usar demasiadas canvas layers.  
+`Node2D.z_index` es similar a depth de GML.  
+
+## Custom Draw
+Método `_draw` es similar al evento Draw de GM. Puede preprocesar el código de dibujo.  
+Normalmente el método `_draw` solo se ejecuta una vez ??. Para redibujar es necesario llamar a `update()` en `_process()` (update es un método de CanvasItem).  
+
+
 
 ## Otros
 ¿Existe editor de spr integrado?  
