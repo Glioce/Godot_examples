@@ -1,6 +1,6 @@
 # Notas
 
-## Entender la ayuda de Godot (integrada en el editor)
+## Ayuda integrada en el editor
 Menú Help  
 - Search (`F1`) - Lista de clases, explorar todos los nodos, buscar tema específico
 
@@ -277,14 +277,38 @@ Un objeto puede contener varios Shape2D. Por lo menos debe tener uno para detect
 
 `_physics_process()` callback para acceder a propiedades físicas. Se llama antes de cada paso de física (por defecto a 60 fps).  
 
-El modo Character es similar a Rigid, pero no puede rotar.
+El modo Character es similar a Rigid, pero no puede rotar!  
+Para modificar prop físicas directamente a un RigidBody, se debe usar el callback `integrate_forces()`
+en lugar de `_physics_process()` para tener aceeso a Physics2DDirectBodyState.  
+En estado Sleep no se ejecuta `integrate_forces(state)`.  
+Propiedades interesantes: can_sleep, contacts_reported, contact_monitor (usando señales). Método get_contact_count().  
+
+Métodos de KinematicBody
+- move_and_collide() - devuelve objeto KinematicCollision2D con propiedades: position (lugar de colisión), normal (vector normal de colisión)
+- Vector2.bounce(Vec2) - rebota usando Vec2 como normal
+- move_and_slide(...) - no necesita delta en los parámetros
 
 Node2D  
 - look_at(Vec2) rotar nodo mirando hacia un punto
 - rotation  
 
-KinematicBody  
-- move_and_slide(Vec2)
+### Kinematic Character (2D)
+Havok promueve dynamic character controller, PhysX promueve Kinematic.  
+
+Controlador dinámico - Rigid body con tensor de inercia infinito. No puede rotar. Primero coisiones, luego resuelve.
+Interacción total, pero impredecible. Soluciones pueden tardar más de un frame (pequeños desplazamientos visibles).  
+
+Controlador cinemático - Intenta moverse a posición sin colisión. Control y mov. más predecible. Sin embargo,
+no puede interactuar directamente con objs del entorno.
+
+### SoftBody
+Nodo usado para simulación de cuerpos deformables.  
+
+## Ragdoll system
+Soporte desde 3.1. Ejemplos con Platformer 3D Demo.  
+Nodo PhysicsBone - se crea fácilmente a partir de un nodo Skeleton. En el editor de escena, clic Skeleton > Create physical skeleton  
+No todos los huesos generados son necesarios.  
+Se pueden cambiar los volúmenes de colisión.  
 
 ### Layers and Masks ??
 Cada CollisionObject2D tiene 20 capas y 20 máscaras.  
@@ -298,6 +322,40 @@ Básicamente se necesitan 2 tipos de nodos:
 - LightOccluder2D - usa un polígono
 
 CanvasModulate se puede usar para oscurecer una escena.  
+
+## Ray-casting
+Godot almacena la info de bajo nivel en servidores. La escena es frontend, Ray-casting es una tarea de bajo nivel.  
+
+Espacio - guarda toda la info de física y colisiones.
+Se puede obtener con `CanvasItem.get_world_2d().space` o con `Spatial.get_world().space`.  
+Devuelven un RID (resource's unique id)(número entero) que se puede usar en Physics2DServer o PysicsServer.  
+
+Código base
+```py
+func _physics_process(delta):
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+
+# o equivalente
+
+func _process(delta):
+	var space_state = get_world_2d().direct_space_state
+```
+
+Ray-cast query
+Un poco similar a collision_line() de GML
+```py
+var space_state = get_world_2d().direct_space_state
+var result = space_state.intersect_ray(from, to, ...)
+```
+Devuelve un diccionario  
+position: Vec2  
+normal: Vec2  
+collider: obj or null  
+collider_id: objID  
+rid: RID  
+shape: int  
+metadata: Variant()  
 
 ## Otros
 ¿Existe editor de spr integrado?  
