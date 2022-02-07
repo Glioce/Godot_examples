@@ -157,9 +157,31 @@ La clase SceneTree tiene varios métodos útiles.
 - Project Settings > pestaña Input Map - Se ùeden asignar varios botones/teclas por entrada. Se usan las unciones `Input.is_action_pressed("...")`, `just_pressed`, `just_released`
 - Función `Inùt.is_key_pressed(KEY_*)` - no hay just_pressed, ni just_released
 
-## Sonido!
+## Sonido / Audio !
 Archivos comunes wav y ogg.  
 Nodo AudioStreamPlayer solo carga archivo de sonido.  
+
+Se puede crear un número ilimitado de bus (a veces llamado canal) y aplicar efectos a cada bus.
+Un bus es una referencia con nombre.  
+
+Escala decibeles - No se puede representar volumen 0. 0 dB es el máximo volumen sin recorte.
+Cada -3 dB el volumen se reduce a la mitad.  
+
+Todos los buses se mezclan en Master. El ruteo se hace de derecha a izquierda.  
+
+Los audio buses pueden contener efectos aplicados en orden. Las propiedades de los efectos se pueden cambiar en inspector.  
+
+AudioStream - objeto abstracto que emite sonido, normalmente un archivo de audio (wav, ogg).
+En Import se pueden hacer ajustees.  
+
+AudioStreamPlayer2D - posicional 2D (panning). Area 2D puede cambiar buses.  
+
+AudioStreamPlayer3D - posicional 3D. Puede reproducir stereo 5.1 o 7.1. Area puede cambiar buses. Efecto Doppler.  
+
+Métodos de los Player:  
+- play()
+- seek()
+- stop()
 
 ## Partículas
 El nodo Particles2D tiene muchas opciones (algunas similares a los sistemas de partículas de GM). Usa material y textura.  
@@ -219,9 +241,63 @@ El orden de dibujo óptimo depende del árbol. No usar demasiadas canvas layers.
 
 ## Custom Draw
 Método `_draw` es similar al evento Draw de GM. Puede preprocesar el código de dibujo.  
-Normalmente el método `_draw` solo se ejecuta una vez ??. Para redibujar es necesario llamar a `update()` en `_process()` (update es un método de CanvasItem).  
+Es un método de CanvasItem (virtual).  
+Normalmente el método `_draw` solo se ejecuta una vez en cada nodo que hereda de CanvasItem.  
+Para redibujar es necesario llamar a `update()` (que también pertenece a CanvasItem).
+Se puede llamar en `_process()` que se ejecuta una vez por cada `_draw()` (update también es un método de CanvasItem).  
 
+## Movimiento / Physics
+Collision detection and collision response. Nodos y objetos son similares en 2D y 3D.  
 
+Se pueden usar varios nodos 2D  
+- Area2D
+- KinematicBody2D
+- RigidBody2D
+Todos necesitan un hijo CollisionShape2D y un Sprite es opcional.  
+
+Vector2 tiene varios métodos útiles  
+- normalized()
+- rotated(theta)
+- length()
+
+Hay disponibles 4 tipos de cuerpos "físicos". El primero hereda de CollisionObject2D.  
+
+Area2D - provee detección e influencia. Detecta empalmes. Define áreas con propiedades físicas especiales.  
+
+Los demás heredan de PhysicsBody2D.  
+
+StaticBody2D - no se mueve con el motor de física. Se puede usar como parte del escenario que no se mueve.  
+
+RigidBody2D - simula física. No se puede controlar directamente, pero se aplican fuerzas.
+Puede cambiar a 4 modos: Rigid, Static, Character, Kinematic.  
+
+KinematicBody2D - Colisión pero no simula física. Se puede mover con código.  
+
+Un objeto puede contener varios Shape2D. Por lo menos debe tener uno para detectar colisión (CollisionShape2D o CollisionPolygon2D).  
+
+`_physics_process()` callback para acceder a propiedades físicas. Se llama antes de cada paso de física (por defecto a 60 fps).  
+
+El modo Character es similar a Rigid, pero no puede rotar.
+
+Node2D  
+- look_at(Vec2) rotar nodo mirando hacia un punto
+- rotation  
+
+KinematicBody  
+- move_and_slide(Vec2)
+
+### Layers and Masks ??
+Cada CollisionObject2D tiene 20 capas y 20 máscaras.  
+- Capa - es donde aparece el objeto
+- Máscara . es donde puede colisionar
+Los objetos pueden tener ninguna capa ni máscara seleccionada.  
+
+## Luces y sombras 2D
+Básicamente se necesitan 2 tipos de nodos:  
+- Light2D - usa una textura para sumar a la escena
+- LightOccluder2D - usa un polígono
+
+CanvasModulate se puede usar para oscurecer una escena.  
 
 ## Otros
 ¿Existe editor de spr integrado?  
