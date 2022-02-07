@@ -304,11 +304,41 @@ no puede interactuar directamente con objs del entorno.
 ### SoftBody
 Nodo usado para simulación de cuerpos deformables.  
 
-## Ragdoll system
+### Ragdoll system
 Soporte desde 3.1. Ejemplos con Platformer 3D Demo.  
 Nodo PhysicsBone - se crea fácilmente a partir de un nodo Skeleton. En el editor de escena, clic Skeleton > Create physical skeleton  
 No todos los huesos generados son necesarios.  
 Se pueden cambiar los volúmenes de colisión.  
+
+## Intro to 2D Animation
+Nodo AnimationPlayer - Se puede "animar" cualquier variable del Inspector y de Scripts. También llamar funciones.  
+
+Animation Panel aparece en el fondo de la pantalla: Controls, Tracks, Timeline, Keyframe settings, Track and timeline controls  
+
+Se basa en fotogramas clave (keyframes)(diamantes blancos y azules).  
+Cada línea es una pista de animación (animation track). Su nombre es una ruta a la propiedad
+(Ej. "AnimationPlayer/Sprite:position")
+
+Shift+D reproducir animación desde el principio.  
+loc, rot, scl - location (position), rotation, scale  
+
+Al cambiar nombres de nodos, las pistas se actualizan automáticamente.  
+En loop, por defecto, el primer frame es el último.  
+
+Update mode ( o update rate)  
+- Continous - actualiza cada frame
+- Discrete - solo en keyframes
+- Trigger - en llaves o triggers (¿cómo funciona?)
+- Capture - ??
+
+Interpolation mode
+- Nearest - parece lo mismo que update mode discrete
+- Linear - simple linear
+- Cubic - mov lento cerca de keyframes
+
+Loop wrap mode
+- Clamp - al final resetea valores
+- Wrap - al final primera llave como sig. llave
 
 ### Layers and Masks ??
 Cada CollisionObject2D tiene 20 capas y 20 máscaras.  
