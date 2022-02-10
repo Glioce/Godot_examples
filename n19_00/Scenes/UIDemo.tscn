@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UIDemoButton.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0, 0, 1 )
+
+[node name="Node" type="Node"]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CenterContainer"]
+margin_left = 421.0
+margin_top = 122.0
+margin_right = 859.0
+margin_bottom = 598.0
+
+[node name="PanelContainerL" type="PanelContainer" parent="CenterContainer/HSplitContainer"]
+margin_right = 104.0
+margin_bottom = 476.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HSplitContainer/PanelContainerL"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 97.0
+margin_bottom = 469.0
+
+[node name="Button" type="Button" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer"]
+margin_right = 90.0
+margin_bottom = 20.0
+custom_styles/hover = SubResource( 1 )
+text = "Click Me"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuButton" type="MenuButton" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer"]
+margin_top = 24.0
+margin_right = 90.0
+margin_bottom = 44.0
+text = "Menu"
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer"]
+margin_top = 48.0
+margin_right = 90.0
+margin_bottom = 72.0
+text = "Check Me"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer"]
+margin_top = 76.0
+margin_right = 90.0
+margin_bottom = 90.0
+
+[node name="Label" type="Label" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer/HBoxContainer"]
+margin_right = 24.0
+margin_bottom = 14.0
+text = "Left"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer/HBoxContainer"]
+margin_left = 28.0
+margin_right = 32.0
+margin_bottom = 14.0
+
+[node name="Label2" type="Label" parent="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer/HBoxContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 14.0
+text = "Right"
+
+[node name="PanelContainerR" type="PanelContainer" parent="CenterContainer/HSplitContainer"]
+margin_left = 116.0
+margin_right = 438.0
+margin_bottom = 476.0
+
+[node name="ColorPicker" type="ColorPicker" parent="CenterContainer/HSplitContainer/PanelContainerR"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 315.0
+margin_bottom = 469.0
+
+[connection signal="pressed" from="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer/Button" to="CenterContainer/HSplitContainer/PanelContainerL/VBoxContainer/Button" method="_on_Button_pressed"]
