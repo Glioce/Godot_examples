@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Textures/TX Props.png" type="Texture" id=2]
@@ -159,6 +159,9 @@
 10/shapes = [  ]
 10/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 32 )
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -175,3 +178,48 @@ limit_left = 0
 limit_top = 0
 limit_right = 2048
 limit_bottom = 1800
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall1" type="Area2D" parent="Walls"]
+scale = Vector2( 20, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall1"]
+position = Vector2( 32, 32 )
+shape = SubResource( 2 )
+
+[node name="Wall4" type="Area2D" parent="Walls"]
+position = Vector2( 0, 640 )
+scale = Vector2( 20, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
+position = Vector2( 32, 32 )
+shape = SubResource( 2 )
+
+[node name="Wall2" type="Area2D" parent="Walls"]
+position = Vector2( 0, 64 )
+scale = Vector2( 1, 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+position = Vector2( 32, 32 )
+shape = SubResource( 2 )
+
+[node name="Wall3" type="Area2D" parent="Walls"]
+position = Vector2( 1216, 64 )
+scale = Vector2( 1, 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
+position = Vector2( 32, 32 )
+shape = SubResource( 2 )
