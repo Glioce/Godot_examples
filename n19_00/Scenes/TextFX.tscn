@@ -7,7 +7,7 @@
 
 [node name="Label" type="Label" parent="."]
 margin_right = 40.0
-margin_bottom = 14.0
+margin_bottom = 53.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -24,6 +24,13 @@ Me gusta complicarme la vida."
 text = "Este es el texto de prueba.
 Me gusta complicarme la vida."
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="RichTextLabel"]
+margin_right = 124.0
+margin_bottom = 53.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
