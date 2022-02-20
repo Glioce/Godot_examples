@@ -14,8 +14,8 @@ var pos = Vector2()
 # range in array
 var minIndex = 0
 var maxIndex = 1
-var val = 0.40 # value to start showing the next word
-var delta = 0.04 # change in each step
+var val = 0.30 # value to start showing the next word
+var delta = 0.05 # change in each step
 
 # Note: The children inherit theme
 
@@ -97,4 +97,7 @@ func _physics_process(_delta):
 
 		if i == maxIndex-1 and label.modulate.a >= val:
 			maxIndex = min(maxIndex+1, labelArr.size()) # next index
+			
+	if Input.is_action_just_pressed("ui_select"):
+		get_tree().reload_current_scene()
 	pass
