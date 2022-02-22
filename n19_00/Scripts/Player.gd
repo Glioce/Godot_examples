@@ -41,3 +41,4 @@ func _physics_process(_delta):
 #		self.position.y += v
 #	if Input.is_action_pressed("ui_up"):
 #		self.position.y -= v
+
