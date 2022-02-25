@@ -87,3 +87,16 @@ func astar_connect_walkable_cells(points_array):
 
 func is_outside_map_bounds(point):
 	return point.x < 0 or point.y < 0 or point.x >= map_size.x or point.y >= map_size.y
+	
+	
+func calculate_path(start, end):
+	var from = calculate_point_index( world_to_map(start))
+	var to = calculate_point_index( world_to_map(end))
+	var map_path = astar_node.get_point_path(from, to)
+	var world_path = PoolVector2Array()
+	
+	for point in map_path:
+		world_path.append(point * cell_size.x + _half_cell_size)
+		
+	print(world_path)
+	return world_path
