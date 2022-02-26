@@ -20,10 +20,12 @@ func _ready():
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			var path = $TileMapCol.calculate_path($Player.position, event.position)
+			var global_mouse_pos = get_global_mouse_position()
+			var path = $TileMapCol.calculate_path($Player.position, global_mouse_pos)
+			#var path = $TileMapCol.calculate_path($Player.position, event.position)
 			#var path = $Navigation2D.get_simple_path($Player.position, event.position, false)
 			$Line2D.points = path
-			#$Line2D.add_point(event.position)
-			#$Player.path = path
+			$Player.path = path
+			$Player.state = $Player.S.FOLLOW
 			print("click ", $Player.position, " ", event.position)
 			#print(path)

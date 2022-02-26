@@ -1,16 +1,12 @@
 extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var r = 3*60 # walking speed
+# Constants and variables
+enum S {IDLE, FOLLOW}
+var state = S.IDLE
+const speed = 3*60 # walking speed in pixels per second
 var v = Vector2() # velocity
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var path := PoolVector2Array()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,7 +14,7 @@ func _ready():
 #	pass
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	v = Vector2(0, 0) # reset velocity
 	
 	if Input.is_action_pressed("ui_right"):
@@ -31,14 +27,22 @@ func _physics_process(_delta):
 		v.y -= 1
 	
 	v = v.normalized()
-	move_and_slide(v * r)
+	move_and_slide(v * speed)
+	if v != Vector2.ZERO: state = S.IDLE
 	
-#	if Input.is_action_pressed("ui_right"):
-#		self.position.x += v
-#	if Input.is_action_pressed("ui_left"):
-#		self.position.x -= v
-#	if Input.is_action_pressed("ui_down"):
-#		self.position.y += v
-#	if Input.is_action_pressed("ui_up"):
-#		self.position.y -= v
-
+	if state == S.FOLLOW:
+		# Calculate the movement distance for this frame
+		var distance_to_walk = speed * delta
+		
+		# Move the player along the path until he has run out of movement or the path ends.
+		while distance_to_walk > 0 and path.size() > 0:
+			var distance_to_next_point = position.distance_to(path[0])
+			if distance_to_walk <= distance_to_next_point:
+				# The player does not have enough movement left to get to the next point.
+				position += position.direction_to(path[0]) * distance_to_walk
+			else:
+				# The player get to the next point
+				position = path[0]
+				path.remove(0)
+			# Update the distance to walk
+			distance_to_walk -= distance_to_next_point
