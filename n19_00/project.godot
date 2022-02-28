@@ -12,8 +12,12 @@ config_version=4
 
 config/name="n19_00"
 config/description="Juego de Navidad"
-run/main_scene="res://Scenes/MainMenu.tscn"
+run/main_scene="res://Scenes/Zones/West.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Scripts/Global.gd"
 
 [display]
 
