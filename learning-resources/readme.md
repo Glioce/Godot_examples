@@ -7,6 +7,7 @@ https://coppolaemilio.com/gamemaker-godot-dictionary/
 
 Tutorials and examples  
 https://gdscript.com  
+http://kidscancode.org/godot_recipes/  
 https://www.davidepesce.com/godot-tutorials/  
 
 GUI tutorials  
