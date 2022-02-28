@@ -12,6 +12,9 @@ onready var half_cell_size = cell_size / 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Assign global scene size in pixels
+	Global.scene_size = map_size * cell_size.x
+	# Find walkable cells and connect them
 	var cells_list = astar_add_walkable_cells()
 	astar_connect_walkable_cells(cells_list)
 
@@ -143,7 +146,7 @@ func astar_connect_walkable_cells(points_array):
 		
 		for diagonal in diagonals:
 			point_relative_index = calculate_point_index(diagonal)
-			if point_relative == point or is_outside_map_bounds(point_relative):
+			if diagonal == point or is_outside_map_bounds(point_relative):
 				continue
 			if not astar_node.has_point(point_relative_index):
 				continue
