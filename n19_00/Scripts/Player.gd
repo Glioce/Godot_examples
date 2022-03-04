@@ -14,6 +14,8 @@ const speed = 3*60 # walking speed in pixels per second
 var v = Vector2() # velocity
 var path := PoolVector2Array()
 
+var door = null
+
 
 func _ready():
 	# Set limits of the camera
@@ -28,47 +30,19 @@ func _ready():
 
 
 func _physics_process(delta):
-	# Reset velocity
-	v = Vector2(0, 0)
-	# Read inputs
-	if Input.is_action_pressed("ui_right"):
-		v.x += 1
-	if Input.is_action_pressed("ui_left"):
-		v.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		v.y += 1
-	if Input.is_action_pressed("ui_up"):
-		v.y -= 1
-	# Normalize velocity
-	v = v.normalized()
+	# Read input
+	v = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	# State machine
 	match state:
 		
 		S.IDLE:
-			# Exit to the right
-			# The global scene size is assigned in TileMapCol _ready func
-			if position.x >= Global.scene_size.x - 32:
-				path.resize(0) # clear path
-				path.append(position + Vector2(64, 0))
-				state = S.TRANSITION
-			# Exit to the left
-			elif position.x <= 32:
-				path.resize(0) # clear path
-				path.append(position - Vector2(64, 0))
-				state = S.TRANSITION
-			# Exit down
-			elif position.y >= Global.scene_size.y - 32:
-				path.resize(0) # clear path
-				path.append(position + Vector2(0, 64))
-				state = S.TRANSITION
-			# Exit up
-			elif position.y <= 32:
-				path.resize(0) # clear path
-				path.append(position - Vector2(0, 64))
-				state = S.TRANSITION
+			if door != null:
+				$Label.text = str(door.calculate_exit_distance(self))
 			else:
-				move_and_slide(v * speed)
+				$Label.text = "X"
+			
+			move_and_slide(v * speed)
 				
 		S.FOLLOW:
 			if v != Vector2.ZERO:
@@ -76,6 +50,11 @@ func _physics_process(delta):
 				state = S.IDLE
 			else:
 				follow_path(delta)
+			
+			if door != null:
+				$Label.text = str(door.calculate_exit_distance(self))
+			else:
+				$Label.text = "X"
 				
 			if path.size() == 0:
 				state = S.IDLE
@@ -102,3 +81,39 @@ func follow_path(d):
 			path.remove(0)
 		# Update the distance to walk
 		distance_to_walk -= distance_to_next_point
+
+# Reset velocity
+	#v = Vector2(0, 0)
+	# Read inputs
+	#if Input.is_action_pressed("ui_right"):
+	#	v.x += 1
+	#if Input.is_action_pressed("ui_left"):
+	#	v.x -= 1
+	#if Input.is_action_pressed("ui_down"):
+	#	v.y += 1
+	#if Input.is_action_pressed("ui_up"):
+	#	v.y -= 1
+	# Normalize velocity
+	#v = v.normalized()
+	
+# Exit to the right
+			# The global scene size is assigned in TileMapCol _ready func
+#			if position.x >= Global.scene_size.x - 32:
+#				path.resize(0) # clear path
+#				path.append(position + Vector2(64, 0))
+#				state = S.TRANSITION
+#			# Exit to the left
+#			elif position.x <= 32:
+#				path.resize(0) # clear path
+#				path.append(position - Vector2(64, 0))
+#				state = S.TRANSITION
+#			# Exit down
+#			elif position.y >= Global.scene_size.y - 32:
+#				path.resize(0) # clear path
+#				path.append(position + Vector2(0, 64))
+#				state = S.TRANSITION
+#			# Exit up
+#			elif position.y <= 32:
+#				path.resize(0) # clear path
+#				path.append(position - Vector2(0, 64))
+#				state = S.TRANSITION
