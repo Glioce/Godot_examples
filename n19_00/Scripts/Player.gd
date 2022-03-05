@@ -24,24 +24,30 @@ func _ready():
 	$Camera2D.limit_right = Global.scene_size.x
 	$Camera2D.limit_bottom = Global.scene_size.y
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 
 func _physics_process(delta):
 	# Read input
 	v = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
+	# Check distance to exit
+	if door != null and state == S.IDLE:
+		var distance = door.calculate_exit_distance(self)
+		$Label.text = str(distance)
+		
+		if distance >= -32:
+			path.resize(0) # clear path
+			path.append(position + door.exit_vector * 64)
+			state = S.TRANSITION
+			
+		if distance >= 0:
+			get_tree().change_scene(door.scene_path)
+	else:
+		$Label.text = "X"
+	
 	# State machine
 	match state:
 		
 		S.IDLE:
-			if door != null:
-				$Label.text = str(door.calculate_exit_distance(self))
-			else:
-				$Label.text = "X"
-			
 			move_and_slide(v * speed)
 				
 		S.FOLLOW:
@@ -50,11 +56,6 @@ func _physics_process(delta):
 				state = S.IDLE
 			else:
 				follow_path(delta)
-			
-			if door != null:
-				$Label.text = str(door.calculate_exit_distance(self))
-			else:
-				$Label.text = "X"
 				
 			if path.size() == 0:
 				state = S.IDLE
