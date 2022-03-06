@@ -308,16 +308,16 @@ points = PoolVector2Array( 0, 64, 128, 64, 128, 128, 0, 128 )
 12/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 752, 448 )
+extents = Vector2( 64, 160 )
 
 [sub_resource type="RectangleShape2D" id=16]
-extents = Vector2( 752, 448 )
+extents = Vector2( 64, 160 )
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 768, 432 )
+extents = Vector2( 64, 160 )
 
 [sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 768, 432 )
+extents = Vector2( 64, 160 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -342,7 +342,7 @@ tile_data = PoolIntArray( 0, 12, 0, 1, 12, 0, 2, 12, 0, 3, 12, 0, 4, 12, 0, 5, 1
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
-position = Vector2( 800, 416 )
+position = Vector2( 224, 480 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
@@ -351,48 +351,65 @@ limit_top = 0
 limit_right = 2048
 limit_bottom = 1800
 
+[node name="Label" type="Label" parent="Player"]
+margin_left = 32.0
+margin_top = -32.0
+margin_right = 72.0
+margin_bottom = -18.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
 
 [node name="Areas" type="Node2D" parent="."]
 
-[node name="AreaWest" type="Area2D" parent="Areas"]
-position = Vector2( -1536, 0 )
+[node name="AreaWest" type="Area2D" parent="Areas" groups=["West"]]
+position = Vector2( 0, 480 )
+rotation = 3.14159
 script = ExtResource( 6 )
-scene_path = "res://Scenes/Zones/West.tscn"
+target_scene = "res://Scenes/Zones/West.tscn"
+target_group = "West"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaWest"]
-position = Vector2( 752, 448 )
 shape = SubResource( 15 )
 
-[node name="AreaEast" type="Area2D" parent="Areas"]
-position = Vector2( 1536, 0 )
+[node name="AreaEast" type="Area2D" parent="Areas" groups=["East"]]
+position = Vector2( 1536, 480 )
 script = ExtResource( 6 )
-scene_path = "res://Scenes/Zones/East.tscn"
+target_scene = "res://Scenes/Zones/East.tscn"
+target_group = "East"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaEast"]
-position = Vector2( 784, 448 )
 shape = SubResource( 16 )
 
-[node name="AreaLake" type="Area2D" parent="Areas"]
-position = Vector2( 0, 896 )
+[node name="AreaLake" type="Area2D" parent="Areas" groups=["Lake"]]
+position = Vector2( 480, 896 )
+rotation = 4.71239
 script = ExtResource( 6 )
-scene_path = "res://Scenes/Zones/Lake.tscn"
+target_scene = "res://Scenes/Zones/Lake.tscn"
+target_group = "Lake"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaLake"]
-position = Vector2( 768, 464 )
 shape = SubResource( 17 )
 
-[node name="AreaChurch" type="Area2D" parent="Areas"]
-position = Vector2( 0, -896 )
+[node name="AreaChurch" type="Area2D" parent="Areas" groups=["Church"]]
+position = Vector2( 800, 0 )
+rotation = 1.5708
 script = ExtResource( 6 )
-scene_path = "res://Scenes/Zones/Church.tscn"
+target_scene = "res://Scenes/Zones/Church.tscn"
+target_group = "Church"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaChurch"]
-position = Vector2( 768, 432 )
+position = Vector2( -7.62939e-06, 0 )
 shape = SubResource( 18 )
 
 [connection signal="body_entered" from="Areas/AreaWest" to="Areas/AreaWest" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Areas/AreaWest" to="Areas/AreaWest" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Areas/AreaEast" to="Areas/AreaEast" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Areas/AreaEast" to="Areas/AreaEast" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Areas/AreaLake" to="Areas/AreaLake" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Areas/AreaLake" to="Areas/AreaLake" method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Areas/AreaChurch" to="Areas/AreaChurch" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Areas/AreaChurch" to="Areas/AreaChurch" method="_on_Area2D_body_exited"]

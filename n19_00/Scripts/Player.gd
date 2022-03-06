@@ -23,25 +23,51 @@ func _ready():
 	#$Camera2D.limit_top = 0
 	$Camera2D.limit_right = Global.scene_size.x
 	$Camera2D.limit_bottom = Global.scene_size.y
+	
+	if Global.scene_transition == true:
+		print("Transitioning")
+		# Search the door
+		var nodes_array = get_tree().get_nodes_in_group(Global.transition_group)
+		door = nodes_array[0] # There's must be only one node in the group
+		# Move the Player to the starting position
+		position = door.position + Global.transition_pos
+		# Add point to path
+		path.resize(0) # Clear path
+		path.append(position - (door.exit_vector * 33)) # Negative vector to enter
+		state = S.TRANSITION # Change state of the Player
+		# Disble flag
+		Global.scene_transition = false
 
 
 func _physics_process(delta):
 	# Read input
 	v = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
-	# Check distance to exit
-	if door != null and state == S.IDLE:
+	# Check distance to scene border
+	if door != null:
 		var distance = door.calculate_exit_distance(self)
 		$Label.text = str(distance)
 		
-		if distance >= -32:
+		# Start the transition
+		if state == S.IDLE and distance >= -32:
 			path.resize(0) # clear path
-			path.append(position + door.exit_vector * 64)
+			path.append(position + (door.exit_vector * 64))
 			state = S.TRANSITION
 			
-		if distance >= 0:
-			get_tree().change_scene(door.scene_path)
-	else:
+		# Exit scene
+		if state == S.TRANSITION and distance >= 0:
+			# Set transition flag to true
+			Global.scene_transition = true
+			# Save relative position
+			Global.transition_pos = position - door.position
+			# Save name of target object
+			Global.transition_group = door.target_group
+			# Chage scene
+			print("Change")
+			get_tree().change_scene(door.target_scene)
+			
+			
+	else: # There's no door
 		$Label.text = "X"
 	
 	# State machine
@@ -62,8 +88,8 @@ func _physics_process(delta):
 				
 		S.TRANSITION:
 			follow_path(delta)
-			#if path.size() == 0:
-				#state = S.IDLE
+			if path.size() == 0:
+				state = S.IDLE
 
 
 func follow_path(d):

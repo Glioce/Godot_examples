@@ -308,7 +308,7 @@ points = PoolVector2Array( 0, 64, 128, 64, 128, 128, 0, 128 )
 12/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 768, 432 )
+extents = Vector2( 64, 160 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
@@ -342,18 +342,28 @@ limit_top = 0
 limit_right = 2048
 limit_bottom = 1800
 
+[node name="Label" type="Label" parent="Player"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
 
 [node name="Areas" type="Node2D" parent="."]
 
-[node name="AreaCenter" type="Area2D" parent="Areas"]
-position = Vector2( 0, -896 )
+[node name="AreaCenter" type="Area2D" parent="Areas" groups=["Lake"]]
+position = Vector2( 480, 0 )
+rotation = 1.5708
 script = ExtResource( 7 )
-scene_path = "res://Scenes/Zones/Center.tscn"
+target_scene = "res://Scenes/Zones/Center.tscn"
+target_group = "Lake"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AreaCenter"]
-position = Vector2( 768, 432 )
+position = Vector2( 3.8147e-06, 0 )
 shape = SubResource( 18 )
 
 [connection signal="body_entered" from="Areas/AreaCenter" to="Areas/AreaCenter" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Areas/AreaCenter" to="Areas/AreaCenter" method="_on_Area2D_body_exited"]
