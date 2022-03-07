@@ -5,7 +5,7 @@ extends KinematicBody2D
 enum S {IDLE, FOLLOW, TRANSITION, EXIT, ENTER, PAUSE}
 # IDLE - the player does nothing
 # FOLLOW - the player follows a path, can receive inputs
-# TRANSITION - follows a path to exit o enter an area
+# TRANSITION - follows a path to exit o enter an area, not receive inputs
 # EXIT - similar to transition, but just exits the current scene
 # ENTER - similar to transition, but just enters to a new scene
 var state = S.IDLE
