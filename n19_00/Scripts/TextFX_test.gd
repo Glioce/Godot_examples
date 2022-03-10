@@ -1,8 +1,10 @@
-extends Label
+extends RichTextLabel
 
-var msg = text
-#"""Este es el texto de prueba.
-#Me gusta complicarme la vida.-"""
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+var msg = """Este es el texto de prueba.
+Me gusta complicarme la vida.-"""
 
 # Words array
 var wordArr = Array()
@@ -19,7 +21,7 @@ var delta = 0.05 # change in each step
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	text = "" # delete text
+	bbcode_text = "" # delete text
 	
 #	var l = Label.new() # create label
 #	print(l.rect_size)

@@ -1,18 +1,18 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://button_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scripts/TextFX.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/TextFX_test.gd" type="Script" id=2]
 
-[node name="TextFX" type="Label"]
-theme = ExtResource( 1 )
-text = "Text"
-script = ExtResource( 2 )
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 53.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 704.0
@@ -23,12 +23,12 @@ bbcode_text = "Este es el texto de prueba.
 Me gusta complicarme la vida."
 text = "Este es el texto de prueba.
 Me gusta complicarme la vida."
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="RichTextLabel"]
-visible = false
 margin_right = 124.0
 margin_bottom = 53.0
 __meta__ = {
