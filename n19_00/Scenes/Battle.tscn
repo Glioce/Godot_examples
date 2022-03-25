@@ -1,405 +1,145 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Textures/aldo_espalda.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Battle.gd" type="Script" id=2]
-[ext_resource path="res://Textures/pinata_cont.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/TextFX.tscn" type="PackedScene" id=4]
-[ext_resource path="res://PurisaRegular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://button_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Textures/recslice.png" type="Texture" id=2]
+[ext_resource path="res://Textures/btnPress.png" type="Texture" id=3]
+[ext_resource path="res://Textures/btnNormal.png" type="Texture" id=4]
+[ext_resource path="res://Textures/btnFocus.png" type="Texture" id=5]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Intro"
-length = 2.0
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteAldo:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = false
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 128, 384 ), Vector2( 320, 384 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpritePina:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = false
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1024, 256 ), Vector2( 832, 256 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SpriteAldo:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = false
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("SpritePina:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = false
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+[node name="Control" type="Control"]
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
-[sub_resource type="Animation" id=2]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("SpriteAldo:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 128, 384 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpritePina:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1024, 256 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SpriteAldo:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("SpritePina:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 160.0
+margin_top = 544.0
+margin_right = 1120.0
+margin_bottom = 736.0
+texture = ExtResource( 2 )
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
-[sub_resource type="DynamicFont" id=3]
-size = 32
-font_data = ExtResource( 5 )
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 368.0
+margin_top = 560.0
+margin_right = 624.0
+margin_bottom = 624.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_focused = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
 
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
+[node name="Label" type="Label" parent="TextureButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "No Jugar"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[sub_resource type="GDScript" id=5]
-script/source = "extends Label
+[node name="TextureButton2" type="TextureButton" parent="."]
+margin_left = 656.0
+margin_top = 560.0
+margin_right = 912.0
+margin_bottom = 624.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_focused = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
 
-var msg = text
-#\"\"\"Este es el texto de prueba.
-#Me gusta complicarme la vida.-\"\"\"
+[node name="Label" type="Label" parent="TextureButton2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Perder"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-# Words array
-var wordArr = Array()
-var labelArr = Array()
-var pos = Vector2()
-#var font = get_font(\"normal_font\")
-# range in array
-var minIndex = 0
-var maxIndex = 1
-var val = 0.30 # value to start showing the next word
-var delta = 0.05 # change in each step
-
-# Note: The children inherit theme
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	text = \"\" # delete text
-	
-#	var l = Label.new() # create label
-#	print(l.rect_size)
-#	l.text = \"word45654\" # assign text of new label
-#	self.add_child(l)
-#	print(l.rect_size)
-	
-	var word = \"\" # empty string, will be filled
-	for c in msg: # iterate over characters
-		if c == ' ' or c == '\\n': # if the char is a separator
-			word += ' ' # add space
-			var label = Label.new() # create label
-			label.text = word # assign text of new label
-			self.add_child(label) # label becomes child
-			label.rect_position = pos
-			
-			if c == ' ':
-				pos.x += label.rect_size.x
-			if c == '\\n':
-				pos.x = 0
-				pos.y += label.rect_size.y
-			
-			# the word is not visible
-			label.modulate.a = 0.0
-			label.rect_scale.y = 0.0
-			
-			labelArr.append(label) # array of labels
-			wordArr.append(word) # append word to array
-			word = \"\" # empty again
-		else:
-			word += c # fill word
-	
-	# Create label for the last word
-	var label = Label.new() # create label
-	label.text = word # assign text
-	self.add_child(label) # label becomes child
-	label.rect_position = pos # set position
-	label.modulate.a = 0.0
-	label.rect_scale.y = 0.0
-	labelArr.append(label)
-	wordArr.append(word) # append the last word
-
-	# Debug
-	for item in wordArr:
-		print(item + \"#\")
-	
-#	var lines = msg.split('\\n') # split lines
-#	var words
-#
-#	for line in lines:
-#		words = line.split(' ')
-#		for word in words:
-#			arr.append(word + ' ')
-#		#arr.append('\\n')
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func _physics_process(_delta):
-	var label
-	for i in range(minIndex, maxIndex):
-		label = labelArr[i]
-		label.rect_scale.y += delta
-		label.modulate.a += delta
-		
-		# not go over 1
-		if label.modulate.a >= 1:
-			label.rect_scale.y = 1
-			label.modulate.a = 1
-			minIndex += 1 # next index
-
-		if i == maxIndex-1 and label.modulate.a >= val:
-			maxIndex = min(maxIndex+1, labelArr.size()) # next index
-			
-	if Input.is_action_just_pressed(\"ui_select\"):
-		get_tree().reload_current_scene()
-	pass
-"
-
-[sub_resource type="Theme" id=6]
-default_font = SubResource( 3 )
-
-[sub_resource type="GDScript" id=7]
-script/source = "extends Label
-
-var msg = text
-#\"\"\"Este es el texto de prueba.
-#Me gusta complicarme la vida.-\"\"\"
-
-# Words array
-var wordArr = Array()
-var labelArr = Array()
-var pos = Vector2()
-#var font = get_font(\"normal_font\")
-# range in array
-var minIndex = 0
-var maxIndex = 1
-var val = 0.30 # value to start showing the next word
-var delta = 0.05 # change in each step
-
-# Note: The children inherit theme
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	text = \"\" # delete text
-	
-#	var l = Label.new() # create label
-#	print(l.rect_size)
-#	l.text = \"word45654\" # assign text of new label
-#	self.add_child(l)
-#	print(l.rect_size)
-	
-	var word = \"\" # empty string, will be filled
-	for c in msg: # iterate over characters
-		if c == ' ' or c == '\\n': # if the char is a separator
-			word += ' ' # add space
-			var label = Label.new() # create label
-			label.text = word # assign text of new label
-			self.add_child(label) # label becomes child
-			label.rect_position = pos
-			
-			if c == ' ':
-				pos.x += label.rect_size.x
-			if c == '\\n':
-				pos.x = 0
-				pos.y += label.rect_size.y
-			
-			# the word is not visible
-			label.modulate.a = 0.0
-			label.rect_scale.y = 0.0
-			
-			labelArr.append(label) # array of labels
-			wordArr.append(word) # append word to array
-			word = \"\" # empty again
-		else:
-			word += c # fill word
-	
-	# Create label for the last word
-	var label = Label.new() # create label
-	label.text = word # assign text
-	self.add_child(label) # label becomes child
-	label.rect_position = pos # set position
-	label.modulate.a = 0.0
-	label.rect_scale.y = 0.0
-	labelArr.append(label)
-	wordArr.append(word) # append the last word
-
-	# Debug
-	for item in wordArr:
-		print(item + \"#\")
-	
-#	var lines = msg.split('\\n') # split lines
-#	var words
-#
-#	for line in lines:
-#		words = line.split(' ')
-#		for word in words:
-#			arr.append(word + ' ')
-#		#arr.append('\\n')
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func _physics_process(_delta):
-	var label
-	for i in range(minIndex, maxIndex):
-		label = labelArr[i]
-		label.rect_scale.y += delta
-		label.modulate.a += delta
-		
-		# not go over 1
-		if label.modulate.a >= 1:
-			label.rect_scale.y = 1
-			label.modulate.a = 1
-			minIndex += 1 # next index
-
-		if i == maxIndex-1 and label.modulate.a >= val:
-			maxIndex = min(maxIndex+1, labelArr.size()) # next index
-			
-	if Input.is_action_just_pressed(\"ui_select\"):
-		get_tree().reload_current_scene()
-	pass
-"
-
-[node name="Node2D" type="Node2D"]
-script = ExtResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Intro = SubResource( 1 )
-anims/RESET = SubResource( 2 )
-
-[node name="SpritePina" type="Sprite" parent="."]
-position = Vector2( 1024, 256 )
-texture = ExtResource( 3 )
-
-[node name="SpriteAldo" type="Sprite" parent="."]
-position = Vector2( 128, 384 )
-texture = ExtResource( 1 )
-flip_h = true
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-visible = false
-margin_top = 576.0
-margin_right = 1280.0
+[node name="TextureButton3" type="TextureButton" parent="."]
+margin_left = 368.0
+margin_top = 640.0
+margin_right = 624.0
 margin_bottom = 704.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_focused = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TextureButton3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Herir(me)"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-margin_left = 576.0
-margin_top = 512.0
-margin_right = 896.0
-margin_bottom = 576.0
+[node name="TextureButton4" type="TextureButton" parent="."]
+margin_left = 656.0
+margin_top = 640.0
+margin_right = 912.0
+margin_bottom = 704.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_focused = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TextureButton4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Curar enem."
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="."]
-margin_top = 576.0
-margin_right = 1280.0
-margin_bottom = 768.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextFX" parent="." instance=ExtResource( 4 )]
-margin_left = 272.0
-margin_top = 613.0
-margin_right = 1008.0
-margin_bottom = 666.0
-theme = SubResource( 4 )
-text = "¡Aldo se enfrenta a piñata de 9 puntas!"
-script = SubResource( 5 )
-
-[node name="TextFX2" parent="." instance=ExtResource( 4 )]
-margin_top = 128.0
-margin_right = 620.0
-margin_bottom = 181.0
-theme = SubResource( 6 )
-text = "Cuando el mundo se vuelve irreal."
-script = SubResource( 7 )
-
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = 896.0
-margin_top = 512.0
-margin_right = 1216.0
-margin_bottom = 576.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 192.0
-margin_right = 320.0
+[node name="Button" type="Button" parent="."]
+margin_left = 256.0
+margin_right = 448.0
 margin_bottom = 128.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 512.0
+margin_right = 704.0
+margin_bottom = 128.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 448.0
+margin_bottom = 320.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
