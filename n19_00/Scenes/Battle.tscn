@@ -26,11 +26,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton" type="TextureButton" parent="."]
-margin_left = 368.0
-margin_top = 560.0
-margin_right = 624.0
-margin_bottom = 624.0
+[node name="TextureButton" type="TextureButton" parent="NinePatchRect"]
+margin_left = 208.0
+margin_top = 16.0
+margin_right = 464.0
+margin_bottom = 80.0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_focused = ExtResource( 5 )
@@ -39,21 +39,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="TextureButton"]
+[node name="Label" type="Label" parent="NinePatchRect/TextureButton"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "No Jugar"
+text = "Don't play"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton2" type="TextureButton" parent="."]
-margin_left = 656.0
-margin_top = 560.0
-margin_right = 912.0
-margin_bottom = 624.0
+[node name="TextureButton2" type="TextureButton" parent="NinePatchRect"]
+margin_left = 496.0
+margin_top = 16.0
+margin_right = 752.0
+margin_bottom = 80.0
+disabled = true
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_focused = ExtResource( 5 )
@@ -62,21 +63,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="TextureButton2"]
+[node name="Label" type="Label" parent="NinePatchRect/TextureButton2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Perder"
+text = "Lose"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton3" type="TextureButton" parent="."]
-margin_left = 368.0
-margin_top = 640.0
-margin_right = 624.0
-margin_bottom = 704.0
+[node name="TextureButton3" type="TextureButton" parent="NinePatchRect"]
+margin_left = 208.0
+margin_top = 96.0
+margin_right = 464.0
+margin_bottom = 160.0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_focused = ExtResource( 5 )
@@ -85,21 +86,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="TextureButton3"]
+[node name="Label" type="Label" parent="NinePatchRect/TextureButton3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Herir(me)"
+text = "Hurt(me)"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureButton4" type="TextureButton" parent="."]
-margin_left = 656.0
-margin_top = 640.0
-margin_right = 912.0
-margin_bottom = 704.0
+[node name="TextureButton4" type="TextureButton" parent="NinePatchRect"]
+margin_left = 496.0
+margin_top = 96.0
+margin_right = 752.0
+margin_bottom = 160.0
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_focused = ExtResource( 5 )
@@ -108,38 +109,92 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="TextureButton4"]
+[node name="Label" type="Label" parent="NinePatchRect/TextureButton4"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-text = "Curar enem."
+text = "Heal enemy"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_left = 256.0
-margin_right = 448.0
-margin_bottom = 128.0
+[node name="Control" type="Control" parent="."]
+margin_left = 160.0
+margin_right = 1120.0
+margin_bottom = 544.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Control"]
+margin_left = 16.0
+margin_top = 48.0
+margin_right = 304.0
+margin_bottom = 256.0
+theme = ExtResource( 1 )
+disabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button4" type="Button" parent="Control"]
+margin_left = 16.0
+margin_top = 288.0
+margin_right = 304.0
+margin_bottom = 496.0
 theme = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button2" type="Button" parent="."]
-margin_left = 512.0
-margin_right = 704.0
-margin_bottom = 128.0
+[node name="Button2" type="Button" parent="Control"]
+margin_left = 336.0
+margin_top = 48.0
+margin_right = 624.0
+margin_bottom = 256.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button3" type="Button" parent="."]
-margin_left = 256.0
-margin_top = 192.0
-margin_right = 448.0
-margin_bottom = 320.0
+[node name="Button5" type="Button" parent="Control"]
+margin_left = 336.0
+margin_top = 288.0
+margin_right = 624.0
+margin_bottom = 496.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button3" type="Button" parent="Control"]
+margin_left = 656.0
+margin_top = 48.0
+margin_right = 944.0
+margin_bottom = 256.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button6" type="Button" parent="Control"]
+margin_left = 656.0
+margin_top = 288.0
+margin_right = 944.0
+margin_bottom = 496.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 480, 32, 480, 512 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D2" type="Line2D" parent="."]
+points = PoolVector2Array( 800, 32, 800, 512 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Line2D3" type="Line2D" parent="."]
+points = PoolVector2Array( 160, 272, 1120, 272 )
+width = 2.0
+default_color = Color( 1, 1, 1, 1 )
