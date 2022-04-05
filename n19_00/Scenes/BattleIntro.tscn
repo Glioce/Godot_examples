@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scripts/Battle.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/BattleIntro.gd" type="Script" id=1]
 [ext_resource path="res://PurisaRegular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Textures/pinata_cont.png" type="Texture" id=4]

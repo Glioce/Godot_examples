@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/btnFocus.png-93fadc3838d442fddbb4ff27e07db95a.stex"
+path="res://.import/btn_press.png-16ffabf2eb41214c0209b18bdd37badc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/btnFocus.png"
-dest_files=[ "res://.import/btnFocus.png-93fadc3838d442fddbb4ff27e07db95a.stex" ]
+source_file="res://Textures/btn_press.png"
+dest_files=[ "res://.import/btn_press.png-16ffabf2eb41214c0209b18bdd37badc.stex" ]
 
 [params]
 

@@ -3,6 +3,13 @@
 [ext_resource path="res://Music/pueblo_tranquilo.ogg" type="AudioStream" id=1]
 
 [node name="Node" type="Node"]
+pause_mode = 2
+__meta__ = {
+"_editor_description_": "pueblo_tranquilo
+start 0.2 s
+loop 20.1 s
+end 59.3 s"
+}
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
