@@ -32,7 +32,7 @@
 #  Focussed - white lines outside
 
 # Connect signals with script to prevent to do manually many times
-# Fast sprites to test
+# Fast drawn sprites to test
 # Define Input Map keys for "yes" and "no" ("accept" and "cancel")
 
 # If there are less actions ulocked make buttons invisible
@@ -46,13 +46,62 @@
 # grab_focus()
 # grab_click_focus()
 # focus_neighbour_*
+#
+# Piñata movemento
+# Defined with the next properties:
+# - Name/ID - name of the definition
+# - Mode - random or pattern/sequence
+# - Grid - grid size (3x1, 3x2, etc., optional)
+# - Diagonal - are diagonal movements allowed?
+# - Pattern - arrays of Vector2 (only if mode is pattern)
+# We can add piñata object properties
+# ¿Can they be saved as a resource?
+# - Name - the same as above
+# - Sprite - appearence
+# - Desc- description
+# - Health - the piñatas are no alive
+# - Speed - does it has any sense?
 
 #extends Node2D
 extends Control
 
+# Objects
 onready var actionsArr = $Actions.get_children()
 onready var gridArr = $Grid.get_children()
 onready var random = RandomNumberGenerator.new()
+
+# How to save the instruments info
+# Each instrument is like an object, having the following attributes:
+# name, description, atk power, size/range/length, speed, effectiveness
+# And can have amulets to modify attributes
+# Are the attacks/moves contained in the player or in the instruments?
+
+# Piñata definition example
+var pina = {
+	"name": "Olla de Barro",
+	"sprite": 0, #how to assing?
+	"desc": "Una piñata sin picos es solo una olla. Está adornada con tiras de papel",
+	"health": 10, #easy to break
+	"speed": 1, #slow
+	"grid": Vector2(3, 1),
+	"mode": "random", #movement
+	"diag": false,
+	"maxd": 1, #max distance
+	"pattern": [
+		Vector2(0,0),
+		Vector2(1,0),
+		Vector2(2,0),
+		Vector2(1,0),
+	],
+}
+
+# Instrument enum
+enum I {}
+
+# Variables of battle
+var pinaHealth = 100 # Health of the piñata
+var time = 100 # Remaining time to break the piñata
+var instrument = Global.instruments[0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,6 +115,7 @@ func _ready():
 	#$Img/Tween.connect("tween_completed", self, "move_pina")
 	random.randomize()
 	move_pina()
+	print(instrument.name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
