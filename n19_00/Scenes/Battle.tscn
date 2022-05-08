@@ -31,6 +31,24 @@ __meta__ = {
 
 [node name="Img" type="Node2D" parent="."]
 
+[node name="Position2D1" type="Position2D" parent="Img"]
+position = Vector2( 320, 144 )
+
+[node name="Position2D2" type="Position2D" parent="Img"]
+position = Vector2( 640, 144 )
+
+[node name="Position2D3" type="Position2D" parent="Img"]
+position = Vector2( 960, 144 )
+
+[node name="Position2D4" type="Position2D" parent="Img"]
+position = Vector2( 320, 400 )
+
+[node name="Position2D5" type="Position2D" parent="Img"]
+position = Vector2( 640, 400 )
+
+[node name="Position2D6" type="Position2D" parent="Img"]
+position = Vector2( 960, 400 )
+
 [node name="Line1" type="Line2D" parent="Img"]
 points = PoolVector2Array( 480, 16, 480, 528 )
 width = 2.0
@@ -243,6 +261,9 @@ texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 9 )
 texture_focused = ExtResource( 9 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button5" type="TextureButton" parent="Grid"]
 margin_left = 336.0

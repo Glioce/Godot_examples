@@ -13,7 +13,7 @@
 # Tut radio button
 # https://www.youtube.com/watch?v=rwxHN25PFGQ
 
-# Tut turn-based combar system
+# Tut turn-based combat system
 # https://github.com/jontopielski/Turn-Based-Combat
 
 # In the game mode there are 2 button sets: actions and grid/zones
@@ -47,7 +47,7 @@
 # grab_click_focus()
 # focus_neighbour_*
 #
-# Piñata movemento
+# Piñata movement
 # Defined with the next properties:
 # - Name/ID - name of the definition
 # - Mode - random or pattern/sequence
@@ -67,7 +67,7 @@ extends Control
 
 # Objects
 onready var actionsArr = $Actions.get_children()
-onready var gridArr = $Grid.get_children()
+onready var gridArr = $Grid.get_children() #buttons on the grid
 onready var random = RandomNumberGenerator.new()
 
 # How to save the instruments info
@@ -94,14 +94,20 @@ var pina = {
 		Vector2(1,0),
 	],
 }
-
-# Instrument enum
-enum I {}
+# Maybe the gid size must be defined outside of pinata object
 
 # Variables of battle
 var pinaHealth = 100 # Health of the piñata
 var time = 100 # Remaining time to break the piñata
 var instrument = Global.instruments[0]
+
+# Other variables
+#var gridSize := Vector2()
+var cellSize := Vector2(320, 256)
+var cellOffset := Vector2(320, 144)
+var grid := Vector2(3, 2) #grid size, just for test, fix later
+var i # position in the grid
+var j
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -113,7 +119,16 @@ func _ready():
 	# Test piñata animation
 	$Img/Tween.connect("tween_all_completed", self, "move_pina")
 	#$Img/Tween.connect("tween_completed", self, "move_pina")
+	
+	# Random seed for movement
 	random.randomize()
+	
+	# Starting position of piñata
+	i = random.randi_range(0, grid.x - 1)
+	j = random.randi_range(0, grid.y - 1)
+	$Img/Pina.position.x = i * cellSize.x + cellOffset.x
+	$Img/Pina.position.y = j * cellSize.y + cellOffset.y
+	
 	move_pina()
 	print(instrument.name)
 
@@ -134,11 +149,35 @@ func _process(_delta):
 		#get_tree().paused = true
 		
 func move_pina():
-	var x = random.randf_range(320, 960)
-	var y = random.randf_range(144, 400)
+	# Completely random
+#	var x = random.randf_range(320, 960)
+#	var y = random.randf_range(144, 400)
+	
+	# Random but aligned to grid
+#	i = random.randi_range(0, grid.x - 1)
+#	j = random.randi_range(0, grid.y - 1)
+#	var x = i * cellSize.x + cellOffset.x
+#	var y = j * cellSize.y + cellOffset.y
+	
+	# Random with step of 1
+	# If the piñata speed is low, the new random position can be the same
+	# We create a list of posible next positions
+	var posArr = []
+	#if pina.speed < 2: posArr.append(Vector2.ZERO) # slow
+	if i > 0: posArr.append(Vector2(-1, 0)) # can go to the left
+	if i < grid.x - 1: posArr.append(Vector2(1, 0)) # can go to the right
+	if j > 0: posArr.append(Vector2(0, -1)) # can go up
+	if j < grid.y - 1: posArr.append(Vector2(0, 1)) # can go down
+	var item = posArr[random.randi_range(0, posArr.size() - 1)] # random item
+	i += item.x
+	j += item.y
+	var x = i * cellSize.x + cellOffset.x
+	var y = j * cellSize.y + cellOffset.y
+	
 	$Img/Tween.interpolate_property($Img/Pina, "position",
 		null, Vector2(x, y), 1.0, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	$Img/Tween.start()
+	
 	
 # Scripts by TheFamousRat
 # https://www.reddit.com/r/godot/comments/bkrtzi/utility_functions_to_pause_a_scenea_node/
