@@ -1,5 +1,5 @@
 # n19
-Christmas game. It was started in GameMaker Studio. Redoing in Godot.  
+Christmas game. It was started in GameMaker Studio. Making again in Godot.  
 
 ## Navigation
 The player navigation uses AStar in GMS (mp_grid).  
