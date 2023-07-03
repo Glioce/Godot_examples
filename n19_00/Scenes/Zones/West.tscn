@@ -356,9 +356,6 @@ margin_top = -36.0
 margin_right = 8.0
 margin_bottom = -22.0
 text = "abc"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
