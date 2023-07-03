@@ -36,7 +36,7 @@ func astar_add_walkable_cells():
 			# ensures we always get the same index with the same input point.
 			var point_id = calculate_point_index(point)
 			# AStar works for both 2d and 3d, so we have to convert the point
-			# coordinates from and to Vector3s.
+			# coordinates from and to Vectors.
 			astar_node.add_point(point_id, point)
 	return points_array
 
@@ -91,7 +91,7 @@ func astar_connect_walkable_cells_diag(points_array):
 				astar_node.connect_points(point_index, point_relative_index, true)
 
 
-# This variation does not connect diagonals tha cause collisions
+# This variation does not connect diagonals that cause collisions
 func astar_connect_walkable_cells(points_array):
 	for point in points_array:
 		var point_index = calculate_point_index(point)
@@ -158,7 +158,7 @@ func is_outside_map_bounds(point):
 
 
 # Returns a PoolVector2Array with points in world coordinates
-# It there's no path, returns an empty array
+# If there's no path, returns an empty array
 func calculate_path(start, end):
 	# Convert world coordinates to map coordinates
 	var startmap = world_to_map(start)
